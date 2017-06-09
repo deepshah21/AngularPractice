@@ -1,0 +1,67 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>angular practices</title>
+        <script src="js/angular.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/script.js"></script>
+        <link rel="stylesheet" href="css/custom.css">
+    </head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myController">
+        <!--1-->
+        <table name="ng-repeat">
+            <!--{{employees}}-->
+            <tr ng-repeat="employee in employees">
+                <th>{{employee.firstname}}</th>
+                <th>{{employee.lastname}}</th>
+                <td ng-repeat="add in employee.address">
+                    {{add.name}}
+                </td>
+            </tr>
+        </table>
+        <br/><br/><br/>
+        <!--2-->
+        <table name="Event handling" border="1">
+            <tr ng-repeat="technology in technologies">
+                <td>{{technology.name}}</td>
+                <td>{{technology.like}}</td>
+                <td>{{technology.dislike}}</td>
+                <td>
+                    <input type="button" value="like" ng-click="incrementLike(technology)">
+                    <input type="button" value="dislike" ng-click="incrementDislike(technology)">
+                </td>
+            </tr>
+        </table>
+        <br/><br/><br/>
+        <!--3 and 4 -->
+        Rows Number :-<input type="number" step="1" min="0" max="5" ng-model="rowlimit"/>
+        <br/><br/>
+        <table name="filter" border="1">
+            <tr>
+                <th ng-click="getSortData('name')">name     <div ng-class="getSortClass('name')"></div></th>
+                <th ng-click="getSortData('DOB')">DOB       <div ng-class="getSortClass('DOB')"></div></th>
+                <th ng-click="getSortData('gender')">Gender <div ng-class="getSortClass('gender')"></div></th>
+                <th ng-click="getSortData('salary')">Salary <div ng-class="getSortClass('salary')"></div></th>
+            </tr>
+            <tr ng-repeat="student in students | orderBy : sortCol : reverseSort | limitTo: rowlimit ">
+                <td>{{student.name}}</td>
+                <td>{{student.DOB | date: "dd/MM/yyyy"}}</td>
+                <td>{{student.gender}}</td>
+                <td>{{student.salary | number}}</td>
+            </tr>
+        </table>
+        <br/><br/><br/>
+        
+        
+        <div name="ng-webservices">
+            <p>id : {{greeting.id}}</p>
+            <p>content : {{greeting.content}}</p>
+        </div>
+        
+    </div>
+        
+</body>
+
+</html>
